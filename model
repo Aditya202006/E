@@ -1,0 +1,22 @@
+const mongoose = require('mongoose')
+
+const Bookschema = new mongoose.Schema({
+    name:{
+        type: String,
+        required:[true,'Product name is required']
+    },
+    price:{
+        type: Number,
+        required:[true,'Product price is required']
+    },
+    product_id:{
+        type: Number,
+        required:[true,'Product id is required']
+    },
+    category:{
+        type:String,
+        required:[true,'Product category is required']
+    }
+})
+
+module.exports = mongoose.model('Book',Bookschema)
