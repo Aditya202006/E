@@ -1,0 +1,11 @@
+const express = require('express');
+const { getAll, getSingle } = require('../controllers/controller.js'); // Make sure it's imported correctly
+const router = express.Router();
+
+router.get('/get', getAll);
+router.get('/get/:id', getSingle);
+// router.post('/add', addProduct);
+// router.put('/update/:id', updateProduct);
+// router.delete('/delete/:id', deleteProduct);
+
+module.exports = router;
