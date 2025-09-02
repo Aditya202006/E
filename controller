@@ -1,0 +1,60 @@
+const Product = require('../models/models');  // Import your model
+
+// Get all products
+const getAll = async (req, res) => {
+    try {
+        const products = await Product.find({});
+        if (products.length > 0) {
+            return res.status(200).json({
+                success: true,
+                message: 'Found products',
+                data: products,
+            });
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: 'No products found',
+            });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: e.message,
+        });
+    }
+};
+
+// Get a single product by ID
+const getSingle = async (req, res) => {
+    const { id } = req.params;  // Extract ID from the request parameters
+
+    try {
+        const product = await Product.findById(id);  // Use the model to find the product by ID
+        if (product) {
+            return res.status(200).json({
+                success: true,
+                message: 'Product found',
+                data: product,
+            });
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: 'Product not found',
+            });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: e.message,
+        });
+    }
+};
+
+// Add more functions like addProduct, updateProduct, deleteProduct...
+
+// Export all functions
+module.exports = { getAll, getSingle};
